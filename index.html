@@ -66,14 +66,19 @@ body{background:#E8E2D4;color:var(--ink);font-family:var(--font-cn);overflow-x:c
 .gate-intro.gate-away{animation:gateAway .3s ease forwards}
 .gate-copy{position:relative;z-index:3;text-align:center;opacity:0}
 .gate-copy.font-ok{animation:gateCopy .7s ease .1s both}
-.gate-open-btn{position:relative;z-index:4;margin-top:22px;font-family:var(--font-hand);font-size:19px;letter-spacing:.14em;color:#FFFEFA;background:var(--red);border:2px solid var(--ink);border-radius:999px;padding:12px 30px 11px;box-shadow:4px 4px 0 rgba(0,0,0,.35);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.gate-xi{position:relative;z-index:4;width:76px;height:76px;margin:16px auto 4px;padding:0;border-radius:50%;background:radial-gradient(circle at 50% 40%,#C4222A,#87151B);border:3px solid #D7A849;box-shadow:0 0 0 5px #87151B,0 0 0 7px #D7A849,0 6px 0 rgba(0,0,0,.28);cursor:pointer;animation:xiPulse 1.7s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
+.gate-xi span{display:block;transform:translateY(1px);font-family:var(--font-serif);font-weight:900;font-size:36px;line-height:1;color:#F3D59B;text-shadow:0 2px 0 rgba(0,0,0,.3)}
+.gate-xi:active{transform:scale(.94)}
+@keyframes xiPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 5px #87151B,0 0 0 7px #D7A849,0 6px 0 rgba(0,0,0,.28),0 0 0 0 rgba(215,168,73,.4)}55%{transform:scale(1.08);box-shadow:0 0 0 7px #87151B,0 0 0 9px #D7A849,0 6px 0 rgba(0,0,0,.28),0 0 30px 10px rgba(215,168,73,.55)}}
+.gate-hint{display:block;margin-top:12px;font-style:normal;font-family:var(--font-hand);font-size:14px;letter-spacing:.22em;color:rgba(24,22,18,.6);animation:hintBlink 1.7s ease-in-out infinite}
+@keyframes hintBlink{0%,100%{opacity:.5}55%{opacity:1}}
 .gate-open-btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 rgba(0,0,0,.35)}
 .gate-copy small{display:block;color:var(--gold);font-size:9px;letter-spacing:.42em;margin-bottom:13px}
 .gate-copy strong{font-family:var(--font-serif);font-size:clamp(28px,9vw,44px);letter-spacing:.12em;color:#FFF9EE;text-shadow:0 2px 0 rgba(0,0,0,.12)}
 .gate-copy span{display:block;margin-top:12px;font-family:var(--font-hand);font-size:18px;color:#F4DCA9;letter-spacing:.12em}
 .gate-door{position:absolute;top:0;bottom:0;width:51%;background:linear-gradient(90deg,#741116,#A91820 45%,#7E1016);border-color:#D5A855;border-style:solid}
 .gate-door::before{content:'';position:absolute;inset:19px;border:1px solid rgba(229,190,112,.65);background-image:linear-gradient(45deg,transparent 46%,rgba(229,190,112,.18) 47% 53%,transparent 54%),linear-gradient(-45deg,transparent 46%,rgba(229,190,112,.18) 47% 53%,transparent 54%);background-size:34px 34px}
-.gate-door::after{content:'囍';position:absolute;top:50%;width:55px;height:55px;border-radius:50%;background:#D7A849;color:#87151B;display:grid;place-items:center;font-family:var(--font-serif);font-size:27px;font-weight:900;box-shadow:0 0 0 5px #87151B,0 0 0 7px #D7A849}
+
 .gate-left{left:0;border-width:0 3px 0 0}
 .gate-intro.gate-open .gate-left{animation:openLeft 1.15s cubic-bezier(.65,0,.25,1) forwards}.gate-right{right:0;border-width:0 0 0 3px}
 .gate-intro.gate-open .gate-right{animation:openRight 1.15s cubic-bezier(.65,0,.25,1) forwards}
@@ -189,7 +194,7 @@ section{position:relative}
 .invitation-title{font-family:var(--font-serif);font-size:clamp(30px,9vw,42px);letter-spacing:.12em;text-indent:.12em;text-align:center;margin:13px 0 22px;color:var(--red-deep)}
 .invitation-copy{font-family:var(--font-serif);font-size:16px;line-height:2.05;text-align:center;letter-spacing:.06em}
 .invitation-copy strong{color:var(--red);font-weight:900}
-.invitation-sign{margin-top:22px;text-align:center;font-family:var(--font-hand);font-size:20px;color:var(--jade)}
+.invitation-sign{margin-top:22px;text-align:center;font-family:var(--font-serif);font-weight:600;font-size:20px;letter-spacing:.08em;color:var(--jade)}
 .letter-mark{position:absolute;right:10px;top:-10px;width:44px;height:44px;border:2px solid var(--red-deep);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--font-serif);font-weight:600;font-size:12px;line-height:1.3;color:var(--red-deep);letter-spacing:1px;transform:rotate(8deg);background:rgba(255,252,246,.94);box-shadow:2px 2px 0 rgba(116,17,22,.18);z-index:6}
 .letter-mark::after{content:'';position:absolute;inset:4px;border:1px dashed var(--red)}
 .letter-route{display:flex;align-items:center;justify-content:center;gap:9px;margin:22px 0 2px;color:rgba(20,20,20,.5);font-size:9px;letter-spacing:.2em}
@@ -431,7 +436,7 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
 
   <div class="gate-roof"></div>
   <div class="gate-door gate-left"></div><div class="gate-door gate-right"></div>
-  <div class="gate-copy"><small>RETURNING HOME</small><strong>沿着厝檐，回来食桌</strong><span>归宁之喜 · 满堂欢喜</span><button class="gate-open-btn" type="button" aria-label="开门进入请柬">开门 · 见喜</button></div>
+  <div class="gate-copy"><small>RETURNING HOME</small><strong>沿着厝檐，回来食桌</strong><span>归宁之喜 · 满堂欢喜</span><button class="gate-xi" type="button" aria-label="点囍字开门"><span>囍</span></button><em class="gate-hint">点一点囍字 · 开门见喜</em></div>
 </div>
 
 <img src="assets/share-cover.jpg" alt="" style="position:absolute;left:0;top:0;width:300px;height:300px;opacity:0.001;pointer-events:none;z-index:-1">
@@ -990,7 +995,7 @@ function toast(msg){
     setTimeout(showGateCopy, 1400);
   } else { setTimeout(showGateCopy, 200); }
   /* 开门按钮: 转场 + 解锁音乐 */
-  var gateOpenBtn = document.querySelector('.gate-open-btn');
+  var gateOpenBtn = document.querySelector('.gate-xi');
   if (gateOpenBtn) gateOpenBtn.addEventListener('click', function(){
     var gi = document.querySelector('.gate-intro');
     if (!gi || gi.classList.contains('gate-open')) return;
