@@ -591,6 +591,8 @@ const CONFIG = {
      留空 = 演示模式（仅存宾客手机本地） */
   RSVP_ENDPOINT: 'https://www.pushplus.plus/send',
   PUSHPLUS_TOKEN: '444c142f38d64137953d8bd862d32d6f',
+  /* PushPlus 一对多群组编码：建好群组后填入，新娘/岳父岳母扫码入组即可同步收到回执；留空 = 只推给自己 */
+  PUSHPLUS_TOPIC: '',
   /* 新人联系电话（上线前替换） */
   GROOM_TEL: '+8610000000000',
   BRIDE_TEL: '+8610000000000',
@@ -680,9 +682,17 @@ function toast(msg){
       const body = {
         token: CONFIG.PUSHPLUS_TOKEN,
         title: '回执：' + data.name + ' · ' + data.count + '位',
-        content: '【回门宴回执】\n姓名：' + data.name + '\n人数：' + data.count + ' 位\n手机：' + data.phone + '\n时间：' + t,
-        template: 'txt'
+        content: '<div style="font-size:15px;font-family:-apple-system,sans-serif"><h3 style="margin:0 0 10px;color:#D8262C">【回门宴回执】</h3>'
+          + '<table border="1" cellpadding="9" cellspacing="0" style="border-collapse:collapse;font-size:14px">'
+          + '<tr><td style="background:#FBF3E4;font-weight:bold">姓名</td><td>' + data.name + '</td></tr>'
+          + '<tr><td style="background:#FBF3E4;font-weight:bold">出席人数</td><td>' + data.count + ' 位</td></tr>'
+          + '<tr><td style="background:#FBF3E4;font-weight:bold">手机</td><td>' + data.phone + '</td></tr>'
+          + '<tr><td style="background:#FBF3E4;font-weight:bold">提交时间</td><td>' + t + '</td></tr>'
+          + '</table>'
+          + '<p style="margin:10px 0 0;color:#888">10月11日（周日）18:00 · 皇城酒店四楼龙凤厅</p></div>',
+        template: 'html'
       };
+      if (CONFIG.PUSHPLUS_TOPIC) body.topic = CONFIG.PUSHPLUS_TOPIC;
       fetch(CONFIG.RSVP_ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) })
         .then(function(r){ return r.json(); })
         .then(function(j){
