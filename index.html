@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
 <title>吾家有喜·回门宴邀请函</title>
   <meta name="theme-color" content="#D8262C">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -284,6 +287,7 @@ section{position:relative}
 .sec-title .rule{flex:1;height:1.5px;background:var(--line)}
 .sec-lead{font-family:var(--font-hand);font-size:19px;color:var(--jade);margin:-14px 0 25px;line-height:1.55}
 .tea-scene{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center;margin:0 0 27px;padding:18px;border:1.5px solid var(--ink);background:#F5EFE2;box-shadow:4px 4px 0 var(--gold)}
+.tea-pic{width:120px;height:120px;object-fit:cover;border-radius:14px;border:1.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);justify-self:center}
 .tea-scene svg{width:120px;height:88px}.tea-scene h3{font-family:var(--font-serif);font-size:18px;color:var(--red);margin-bottom:6px}.tea-scene p{font-size:12px;line-height:1.75;color:rgba(20,20,20,.65)}
 .ticket{position:relative;background:#FFFEFA;border:2px solid var(--ink);box-shadow:6px 6px 0 rgba(20,20,20,.85)}
 .ticket::before,.ticket::after{content:'';position:absolute;width:22px;height:22px;background:var(--paper);border:2px solid var(--ink);border-radius:50%;top:50%;transform:translateY(-50%)}
@@ -374,13 +378,10 @@ section{position:relative}
 
 /* ===== 页脚 ===== */
 footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;position:relative}
-.home-ending{position:relative;height:230px;background:#16140F;overflow:hidden;border-bottom:2px solid #E0B65D}
 .home-ending::before{content:'';position:absolute;inset:22px 12% 0;border:8px solid #6E1719;border-bottom:0;border-radius:100px 100px 0 0;box-shadow:inset 0 0 40px rgba(0,0,0,.65)}
 .home-ending::after{content:'';position:absolute;left:50%;bottom:24px;width:168px;height:64px;background:radial-gradient(ellipse at center,#C44027 0 44%,#8F241C 45% 64%,#E0B65D 65% 69%,transparent 70%);transform:translateX(-50%);filter:drop-shadow(0 0 22px rgba(241,183,76,.5))}
-.ending-house{position:absolute;left:50%;top:30px;transform:translateX(-50%);width:200px;height:auto;z-index:2}.home-lamp::before{content:'囍';position:absolute;inset:0;display:grid;place-items:center;color:#F7D88F;font-family:var(--font-serif);font-size:21px;font-weight:900}.home-lamp::after{content:'';position:absolute;left:22px;top:53px;width:3px;height:34px;background:#E5B255;box-shadow:-7px 8px 0 #E5B255,7px 8px 0 #E5B255}
-.round-guests{position:absolute;left:50%;bottom:43px;width:235px;height:95px;transform:translateX(-50%);z-index:1}
+.home-lamp::after{content:'';position:absolute;left:22px;top:53px;width:3px;height:34px;background:#E5B255;box-shadow:-7px 8px 0 #E5B255,7px 8px 0 #E5B255}
 .round-guests i{position:absolute;width:25px;height:32px;border-radius:50% 50% 43% 43%;background:#312B22;border:2px solid #D39D54}.round-guests i:nth-child(1){left:3px;top:24px}.round-guests i:nth-child(2){left:40px;top:2px}.round-guests i:nth-child(3){right:40px;top:2px}.round-guests i:nth-child(4){right:3px;top:24px}
-.ending-copy{position:absolute;left:0;right:0;bottom:5px;text-align:center;color:#F3D59B;font-family:var(--font-serif);font-size:11px;letter-spacing:.3em;z-index:3}
 .foot-tear{display:block;width:100%;height:26px;margin-top:-25px}
 .rsvp-sec + footer .foot-tear{background:var(--paper)}
 .foot-inner{max-width:640px;margin:0 auto;padding:44px 22px 0;text-align:center}
@@ -526,7 +527,6 @@ try{
   <div class="wrap">
     <div class="date-kicker-row reveal">
       <span class="kicker">NO.02 · THE DATE</span>
-      <span class="cn">丙午马年 · 九月初二</span>
     </div>
     <h2 class="section-human-title reveal">良辰<em>已定</em></h2>
     <p class="section-human-copy reveal">十月十一，周日。<br>别睡懒觉，晚上来吃席。</p>
@@ -639,7 +639,7 @@ try{
     <div class="sec-title reveal"><span class="no">NO.04</span><h2>今日喜程</h2><i class="rule"></i></div>
     <p class="sec-lead reveal">今天没什么复杂安排：先见面，再吃席，最后尽兴而归。</p>
     <div class="tea-scene reveal">
-      <svg viewBox="0 0 120 88" aria-label="潮汕功夫茶线描插画" style="position:absolute;left:4%;top:5%;width:46px;height:46px;z-index:5"><g fill="none" stroke="#21665B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M45 16c-4-4 4-8 0-13"/><path d="M58 14c-4-4 4-8 0-13"/><path d="M71 16c-4-4 4-8 0-13"/><path d="M34 32c16-9 36-9 52 0"/><circle cx="60" cy="20" r="3"/><path d="M28 32h64c-1 15-13 25-32 25S29 47 28 32z"/><path d="M22 64h76"/><path d="M13 80a9 9 0 0 1 18 0"/><path d="M51 80a9 9 0 0 1 18 0"/><path d="M89 80a9 9 0 0 1 18 0"/></g><g fill="#D8262C"><circle cx="60" cy="9" r="2"/><circle cx="22" cy="73" r="2.2"/><circle cx="60" cy="73" r="2.2"/><circle cx="98" cy="73" r="2.2"/></g></svg>
+      <img src="assets/kungfu-tea.jpg" alt="潮汕功夫茶" class="tea-pic" width="120" height="120">
       <div><h3>先食茶，再入席</h3><p>潮汕人的见面，从一杯工夫茶开始。先坐下来叙叙旧，再慢慢等人齐、等菜香。</p></div>
     </div>
     <div class="ticket reveal">
@@ -723,10 +723,6 @@ try{
 
 <footer>
   <div class="foot-tear"></div>
-  <div class="home-ending" aria-label="屋内亮灯，一家人围桌团圆">
-    <svg class="ending-house" viewBox="0 0 200 128" aria-label="亮灯的小屋插画"><g stroke="#F3D59B" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 56 Q34 32 100 26 Q166 32 180 56"/><path d="M14 58 Q22 50 34 48"/><path d="M186 58 Q178 50 166 48"/><path d="M92 26 Q100 15 108 26"/><path d="M40 58v52h120V58"/><rect x="56" y="72" width="30" height="30" fill="#F4B94F"/><path d="M71 72v30M56 87h30"/><path d="M104 110V74h24v36"/><circle cx="160" cy="92" r="13" fill="#D8262C"/><path d="M160 105v8"/><path d="M152 70c-3-4 3-7 0-11"/><path d="M168 70c-3-4 3-7 0-11"/></g><g fill="#F4B94F"><circle cx="71" cy="87" r="2.5"/><circle cx="160" cy="92" r="4"/></g></svg>
-    <p class="ending-copy">屋里有灯 · 桌上有菜 · 身边有你</p>
-  </div>
   <i class="spk s7"></i>
   <i class="spk s8 gold"></i>
   <svg class="fwx fw2" viewBox="0 0 60 60" aria-hidden="true"><g stroke="#E8B84B" stroke-width="2.4" stroke-linecap="round"><line x1="30" y1="2" x2="30" y2="12"/><line x1="30" y1="48" x2="30" y2="58"/><line x1="2" y1="30" x2="12" y2="30"/><line x1="48" y1="30" x2="58" y2="30"/><line x1="10" y1="10" x2="17" y2="17"/><line x1="43" y1="43" x2="50" y2="50"/><line x1="50" y1="10" x2="43" y2="17"/><line x1="17" y1="43" x2="10" y2="50"/></g><circle cx="30" cy="30" r="3.2" fill="#FFFEFA"/></svg>
