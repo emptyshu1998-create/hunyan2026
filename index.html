@@ -989,11 +989,10 @@ function toast(msg){
     setTimeout(function(){ gi.style.display = 'none'; }, 1650);
   });
 
-  /* 页面打开 2 秒后后台预热音乐（不抢首屏带宽，起播更快） */
+  /* 页面打开 2 秒后后台预热音乐（不抢首屏带宽，起播更快）；必须走 ensureAudio 以挂上 UI 事件监听 */
   setTimeout(function(){
-    if (!CONFIG.MUSIC_URL || audio) return;
-    audio = new Audio(CONFIG.MUSIC_URL);
-    audio.loop = true; audio.preload = 'auto'; audio.load();
+    if (!CONFIG.MUSIC_URL) return;
+    ensureAudio().load();
   }, 2000);
 })();
 </script>
