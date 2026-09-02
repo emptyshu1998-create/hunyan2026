@@ -800,12 +800,12 @@ function toast(msg){
   });
   /* 微信内自动播放（可随时点按钮暂停） */
   document.addEventListener('WeixinJSBridgeReady', play, false);
-  /* 页面加载完成后后台预热音乐（不抢首屏带宽，起播更快） */
-  window.addEventListener('load', function(){
+  /* 页面打开 2 秒后后台预热音乐（不抢首屏带宽，起播更快） */
+  setTimeout(function(){
     if (!CONFIG.MUSIC_URL || audio) return;
     audio = new Audio(CONFIG.MUSIC_URL);
     audio.loop = true; audio.preload = 'auto'; audio.load();
-  }, false);
+  }, 2000);
 })();
 </script>
 </body>
