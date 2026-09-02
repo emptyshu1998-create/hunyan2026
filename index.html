@@ -70,7 +70,7 @@ body{background:#E8E2D4;color:var(--ink);font-family:var(--font-cn);overflow-x:c
 .gate-xi span{display:block;transform:translateY(1px);font-family:var(--font-serif);font-weight:900;font-size:36px;line-height:1;color:#F3D59B;text-shadow:0 2px 0 rgba(0,0,0,.3)}
 .gate-xi:active{transform:scale(.94)}
 @keyframes xiPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 5px #87151B,0 0 0 7px #D7A849,0 6px 0 rgba(0,0,0,.28),0 0 0 0 rgba(215,168,73,.4)}55%{transform:scale(1.08);box-shadow:0 0 0 7px #87151B,0 0 0 9px #D7A849,0 6px 0 rgba(0,0,0,.28),0 0 30px 10px rgba(215,168,73,.55)}}
-.gate-hint{display:block;margin-top:12px;font-style:normal;font-family:var(--font-hand);font-size:14px;letter-spacing:.22em;color:rgba(24,22,18,.6);animation:hintBlink 1.7s ease-in-out infinite}
+.gate-hint{display:block;margin-top:12px;font-style:normal;font-family:var(--font-hand);font-size:15px;letter-spacing:.22em;color:#F6DEA9;text-shadow:0 1px 0 rgba(0,0,0,.35);animation:hintBlink 1.7s ease-in-out infinite}
 @keyframes hintBlink{0%,100%{opacity:.5}55%{opacity:1}}
 .gate-copy small{display:block;color:var(--gold);font-size:9px;letter-spacing:.42em;margin-bottom:13px}
 .gate-copy strong{font-family:var(--font-serif);font-size:clamp(28px,9vw,44px);letter-spacing:.12em;color:#FFF9EE;text-shadow:0 2px 0 rgba(0,0,0,.12)}
@@ -961,24 +961,7 @@ function toast(msg){
     if (audio && !audio.paused) audio.pause();
     else play();
   });
-  /* 1) 打开页面即尝试自动播放（允许的环境立即响，被拦则静默） */
-  play();
-  /* 2) 首次触摸页面任意位置即启动（跳过按钮自身避免与开关冲突；成功后不再干预，暂停后滑动不会误启动） */
-  function firstTouch(e){
-    if (autoStarted){ cleanup(); return; }
-    if (btn.contains(e.target)) return;
-    cleanup(); play();
-  }
-  function cleanup(){
-    document.removeEventListener('touchstart', firstTouch);
-    document.removeEventListener('touchend', firstTouch);
-    document.removeEventListener('mousedown', firstTouch);
-  }
-  /* touchend/mousedown 才是浏览器的用户激活事件（touchstart 不算），挂错会导致 play 仍被拦 */
-  document.addEventListener('touchend', firstTouch, {passive: true});
-  document.addEventListener('mousedown', firstTouch);
-  /* 3) 微信旧内核兼容 */
-  document.addEventListener('WeixinJSBridgeReady', play, false);
+  /* 音乐只在点囍字开门时播放；正文中可点右上角唱片键手动开关 */
   /* 开场文案等字体就绪再淡入（避免字体加载后跳变） */
   var gateShown = false;
   function showGateCopy(){
