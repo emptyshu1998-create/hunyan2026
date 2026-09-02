@@ -774,7 +774,7 @@ function toast(msg){
 /* ===== 背景音乐 ===== */
 (function(){
   var btn = document.getElementById('musicBtn');
-  var audio = null, timer = null;
+  var audio = null, timer = null, autoStarted = false;
   function spawn(){
     var n = document.createElement('span');
     n.className = 'mini-note';
@@ -787,18 +787,43 @@ function toast(msg){
   }
   function startNotes(){ if (!timer){ spawn(); timer = setInterval(spawn, 420); } }
   function stopNotes(){ clearInterval(timer); timer = null; }
+  function ensureAudio(){
+    if (!audio){
+      audio = new Audio(CONFIG.MUSIC_URL);
+      audio.loop = true; audio.preload = 'auto';
+      /* UI 状态由媒体事件驱动（play() promise 在部分内核不可靠） */
+      audio.addEventListener('playing', function(){ btn.classList.add('playing'); startNotes(); autoStarted = true; });
+      audio.addEventListener('pause', function(){ btn.classList.remove('playing'); stopNotes(); });
+    }
+    return audio;
+  }
   function play(){
     if (!CONFIG.MUSIC_URL) return;
-    if (!audio){ audio = new Audio(CONFIG.MUSIC_URL); audio.loop = true; }
-    var p = audio.play();
-    if (p && p.catch) p.then(function(){ btn.classList.add('playing'); startNotes(); }).catch(function(){});
+    var p = ensureAudio().play();
+    if (p && p.catch) p.catch(function(){});
   }
   btn.addEventListener('click', function(){
     if (!CONFIG.MUSIC_URL){ btn.style.animation = 'rock .5s'; setTimeout(function(){ btn.style.animation = ''; }, 500); return; }
-    if (btn.classList.contains('playing')){ audio.pause(); btn.classList.remove('playing'); stopNotes(); }
+    if (audio && !audio.paused) audio.pause();
     else play();
   });
-  /* 微信内自动播放（可随时点按钮暂停） */
+  /* 1) 打开页面即尝试自动播放（允许的环境立即响，被拦则静默） */
+  play();
+  /* 2) 首次触摸页面任意位置即启动（跳过按钮自身避免与开关冲突；成功后不再干预，暂停后滑动不会误启动） */
+  function firstTouch(e){
+    if (autoStarted){ cleanup(); return; }
+    if (btn.contains(e.target)) return;
+    cleanup(); play();
+  }
+  function cleanup(){
+    document.removeEventListener('touchstart', firstTouch);
+    document.removeEventListener('touchend', firstTouch);
+    document.removeEventListener('mousedown', firstTouch);
+  }
+  /* touchend/mousedown 才是浏览器的用户激活事件（touchstart 不算），挂错会导致 play 仍被拦 */
+  document.addEventListener('touchend', firstTouch, {passive: true});
+  document.addEventListener('mousedown', firstTouch);
+  /* 3) 微信旧内核兼容 */
   document.addEventListener('WeixinJSBridgeReady', play, false);
   /* 页面打开 2 秒后后台预热音乐（不抢首屏带宽，起播更快） */
   setTimeout(function(){
