@@ -59,8 +59,9 @@ html{scroll-behavior:smooth;overflow-x:hidden}
 body{background:#E8E2D4;color:var(--ink);font-family:var(--font-cn);overflow-x:clip;font-size:16px}
 
 /* ===== 开门见喜：沿着厝檐回家 ===== */
-.gate-intro{position:fixed;inset:0;z-index:999;background:var(--paper);display:flex;align-items:center;justify-content:center;overflow:hidden;animation:gateAway .25s ease 1.55s forwards;pointer-events:none}
-.gate-copy{position:relative;z-index:3;text-align:center;animation:gateCopy .7s ease .15s both}
+.gate-intro{position:fixed;inset:0;z-index:999;background:var(--paper);display:flex;align-items:center;justify-content:center;overflow:hidden;animation:gateAway .25s ease 2.75s forwards;pointer-events:none}
+.gate-copy{position:relative;z-index:3;text-align:center;opacity:0}
+.gate-copy.font-ok{animation:gateCopy .7s ease .1s both}
 .gate-copy small{display:block;color:var(--gold);font-size:9px;letter-spacing:.42em;margin-bottom:13px}
 .gate-copy strong{font-family:var(--font-serif);font-size:clamp(28px,9vw,44px);letter-spacing:.12em;color:#FFF9EE;text-shadow:0 2px 0 rgba(0,0,0,.12)}
 .gate-copy span{display:block;margin-top:12px;font-family:var(--font-hand);font-size:18px;color:#F4DCA9;letter-spacing:.12em}
@@ -149,9 +150,9 @@ section{position:relative}
 .tape--1{top:-14px;left:-26px;background:rgba(244,200,66,.85);transform:rotate(-38deg);clip-path:polygon(0 8%,4% 0,100% 4%,98% 92%,94% 100%,2% 96%)}
 .tape--2{bottom:-10px;right:-30px;background:rgba(216,38,44,.78);transform:rotate(34deg);clip-path:polygon(0 8%,4% 0,100% 4%,98% 92%,94% 100%,2% 96%)}
 .tape::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.25) 0 3px,transparent 3px 7px)}
-.photo-note{position:absolute;right:-8px;top:-8px;background:#FFF9E3;border:1.5px solid var(--ink);padding:12px 14px 10px;transform:rotate(4deg);box-shadow:4px 5px 0 rgba(20,20,20,.85);max-width:190px}
+.photo-note{position:absolute;right:-8px;top:-8px;background:#FFF9E3;border:1.5px solid var(--ink);padding:9px 12px 8px;transform:rotate(4deg);box-shadow:4px 5px 0 rgba(20,20,20,.85);max-width:230px}
 .photo-note::before{content:'';position:absolute;top:-9px;left:50%;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#E8434A,var(--red) 60%,var(--red-deep));box-shadow:0 3px 5px rgba(0,0,0,.3)}
-.photo-note p{font-family:var(--font-hand);font-size:19px;line-height:1.35;color:var(--ink)}
+.photo-note p{font-family:var(--font-hand);font-size:16px;line-height:1.2;white-space:nowrap;color:var(--ink)}
 .hero-blob{position:absolute;right:-12vw;bottom:4vh;width:54vw;height:54vw;max-width:290px;max-height:290px;border-radius:50%;background:var(--red);z-index:-1;animation:blobFloat 7s ease-in-out infinite}
 @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-14px,18px) scale(1.06)}}
 .hero-star{position:absolute;left:-26px;top:36%;width:44px;height:44px;background:var(--ink);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation:spinSlow 9s linear infinite;opacity:.9}
@@ -222,7 +223,7 @@ section{position:relative}
 .home-note b{display:block;font-family:var(--font-hand);font-size:21px;letter-spacing:.18em;font-weight:400}
 .home-note span{display:block;font-size:8px;letter-spacing:.22em;margin-top:4px;opacity:.92}
 @keyframes notePop{from{opacity:0;transform:rotate(5deg) scale(.4) translateY(14px)}to{opacity:1;transform:rotate(5deg) scale(1) translateY(0)}}
-.date-sec .date-sec .date-kicker-row{display:flex;justify-content:space-between;align-items:center}
+.date-sec .date-kicker-row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
 .date-kicker-row .cn{font-size:11px;letter-spacing:.3em;font-weight:700;color:rgba(20,20,20,.5)}
 .date-big{font-family:var(--font-big);font-size:clamp(72px,23.5vw,172px);line-height:.9;letter-spacing:-.01em;margin:16px 0 4px;position:relative;display:inline-block;white-space:nowrap}
 .date-big .mm{color:var(--ink)}
@@ -984,6 +985,20 @@ function toast(msg){
   document.addEventListener('mousedown', firstTouch);
   /* 3) 微信旧内核兼容 */
   document.addEventListener('WeixinJSBridgeReady', play, false);
+  /* 开场文案等字体就绪再淡入（避免字体加载后跳变） */
+  var gateShown = false;
+  function showGateCopy(){
+    if (gateShown) return; gateShown = true;
+    var g = document.querySelector('.gate-copy');
+    if (g) g.classList.add('font-ok');
+  }
+  if (document.fonts && document.fonts.load){
+    Promise.all([
+      document.fonts.load('1em "Ma Shan Zheng"'),
+      document.fonts.load('600 1em "Noto Serif SC"')
+    ]).then(showGateCopy).catch(showGateCopy);
+    setTimeout(showGateCopy, 1400);
+  } else { setTimeout(showGateCopy, 200); }
   /* 页面打开 2 秒后后台预热音乐（不抢首屏带宽，起播更快） */
   setTimeout(function(){
     if (!CONFIG.MUSIC_URL || audio) return;
