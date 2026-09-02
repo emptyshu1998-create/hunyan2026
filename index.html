@@ -1034,18 +1034,19 @@ function toast(msg){
   function mark(){ lastTouch = Date.now(); }
   function tick(){ if (Date.now() - lastTouch < RESUME) return; go(idx + 1); }
   function start(){ if (!timer) timer = setInterval(tick, STEP); }
-  var sx = 0, sy = 0, dx = 0, drag = false, locked = false;
-  track.addEventListener('touchstart', function(e){
-    if (e.touches.length !== 1) return;
-    drag = true; locked = false; mark();
-    sx = e.touches[0].clientX; sy = e.touches[0].clientY; dx = 0;
+  var sx = 0, sy = 0, dx = 0, drag = false, locked = false, pid = null;
+  track.addEventListener('pointerdown', function(e){
+    if (drag) return;
+    drag = true; locked = false; pid = e.pointerId; mark();
+    sx = e.clientX; sy = e.clientY; dx = 0;
     track.style.transition = 'none';
-  }, {passive: true});
-  track.addEventListener('touchmove', function(e){
-    if (!drag || !e.touches.length) return;
-    dx = e.touches[0].clientX - sx;
-    var dy = e.touches[0].clientY - sy;
-    if (!locked && (Math.abs(dx) > 8 || Math.abs(dy) > 8)){
+    try { track.setPointerCapture(pid); } catch (err) {}
+  });
+  track.addEventListener('pointermove', function(e){
+    if (!drag || e.pointerId !== pid) return;
+    dx = e.clientX - sx;
+    var dy = e.clientY - sy;
+    if (!locked && (Math.abs(dx) > 6 || Math.abs(dy) > 6)){
       locked = true;
       if (Math.abs(dx) > Math.abs(dy)) mark();
     }
@@ -1053,7 +1054,7 @@ function toast(msg){
       if (e.cancelable) e.preventDefault();
       track.style.transform = 'translateX(calc(' + (-idx * 100) + '% + ' + dx + 'px))';
     }
-  }, {passive: false});
+  });
   function endDrag(commit){
     if (!drag) return; drag = false;
     track.style.transition = '';
@@ -1061,8 +1062,9 @@ function toast(msg){
     if (commit && Math.abs(dx) > w * 0.15) go(idx + (dx < 0 ? 1 : -1), true);
     else go(idx, true);
   }
-  track.addEventListener('touchend', function(){ endDrag(true); });
-  track.addEventListener('touchcancel', function(){ endDrag(false); });
+  track.addEventListener('pointerup', function(e){ if (e.pointerId === pid) endDrag(true); });
+  track.addEventListener('pointercancel', function(e){ if (e.pointerId === pid) endDrag(false); });
+  track.addEventListener('dragstart', function(e){ e.preventDefault(); });
   start();
 })();
 </script>
