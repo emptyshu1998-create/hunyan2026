@@ -328,12 +328,14 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
   .notes-row{grid-template-columns:1fr 1fr 1fr}
   .note-card:nth-child(3){grid-column:span 1}
 }
-#musicBtn{position:fixed;top:14px;right:14px;z-index:70;width:42px;height:42px;border-radius:50%;background:rgba(255,254,250,.93);border:2px solid var(--ink);box-shadow:3px 3px 0 rgba(20,20,20,.78);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent}
-#musicBtn svg{width:21px;height:21px}
-#musicBtn svg path{fill:#2A2620;transition:fill .3s}
-#musicBtn.playing svg path{fill:#D8262C}
-#musicBtn.playing svg{animation:mBounce 1s ease-in-out infinite}
-@keyframes mBounce{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-2.5px) rotate(5deg)}}
+#musicBtn{position:fixed;top:12px;right:12px;z-index:70;width:50px;height:50px;border-radius:50%;background:rgba(255,254,250,.93);border:2px solid var(--ink);box-shadow:3px 3px 0 rgba(20,20,20,.78);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent}
+#musicBtn svg{width:30px;height:30px}
+#musicBtn .disc{transform-origin:12px 12px;opacity:.94}
+#musicBtn.playing .disc{opacity:1;animation:discSpin 2.8s linear infinite}
+#musicBtn .ico-pause{display:none}
+#musicBtn.playing .ico-pause{display:block}
+#musicBtn.playing .ico-play{display:none}
+@keyframes discSpin{to{transform:rotate(360deg)}}
 .mini-note{position:absolute;pointer-events:none;color:#D8262C;font-weight:700;line-height:1;opacity:0;animation-name:noteUp;animation-timing-function:ease-out;animation-fill-mode:forwards;text-shadow:0 1px 0 rgba(255,254,250,.85)}
 @keyframes noteUp{0%{opacity:0;transform:translate(0,0) rotate(0deg)}18%{opacity:.95}100%{opacity:0;transform:translate(var(--dx),-36px) rotate(var(--rot))}}
 .call-item{display:flex;flex-direction:column;align-items:center;gap:7px}
@@ -345,7 +347,19 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
 
 <img src="assets/share-cover.jpg" alt="" style="position:absolute;left:0;top:0;width:300px;height:300px;opacity:0.001;pointer-events:none;z-index:-1">
 <button id="musicBtn" aria-label="背景音乐开关" title="背景音乐">
-  <svg class="mnote" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+  <g class="disc">
+    <circle cx="12" cy="12" r="11" fill="#2A2620"/>
+    <circle cx="12" cy="12" r="8" fill="none" stroke="rgba(255,254,250,.28)" stroke-width="0.9"/>
+    <circle cx="12" cy="12" r="6" fill="none" stroke="rgba(255,254,250,.2)" stroke-width="0.9"/>
+    <path d="M4.5 9.5 A8.5 8.5 0 0 1 9.5 4.5" fill="none" stroke="rgba(255,254,250,.5)" stroke-width="1.1" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="4.6" fill="#D8262C"/>
+  </g>
+  <g class="ctrl">
+    <polygon class="ico-play" points="10.2,9.2 16.4,12 10.2,14.8" fill="#FFFEFA"/>
+    <g class="ico-pause" fill="#FFFEFA"><rect x="9.6" y="8.6" width="2.3" height="6.8" rx="1"/><rect x="12.9" y="8.6" width="2.3" height="6.8" rx="1"/></g>
+  </g>
+</svg>
 </button>
 <!-- ===== 主内容 ===== -->
 <div class="binding"></div>
@@ -597,7 +611,7 @@ const CONFIG = {
   GROOM_TEL: '+8610000000000',
   BRIDE_TEL: '+8610000000000',
   /* 背景音乐地址（mp3 直链），留空 = 暂不播放 */
-  MUSIC_URL: ''
+  MUSIC_URL: 'https://emptyshu1998-create.github.io/hunyan2026/assets/Charlie-Wilson-Forever-Valentine.mp3'
 };
 const WEDDING_TIME = new Date('2026-10-11T18:00:00+08:00');
 
