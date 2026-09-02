@@ -48,7 +48,7 @@
 <style>
 :root{
   --red:#D8262C; --red-deep:#B01116; --ink:#141414; --paper:#FAF6EF;
-  --paper2:#F3EDE0; --line:rgba(20,20,20,.14); --gold:#B8935A;
+  --paper2:#F3EDE0; --line:rgba(20,20,20,.14); --gold:#B8935A; --jade:#21665B;
   --font-cn:'Noto Sans SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
   --font-serif:'Noto Serif SC','Songti SC',serif;
   --font-big:'Archivo Black','Noto Sans SC',sans-serif;
@@ -57,6 +57,23 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;overflow-x:hidden}
 body{background:#E8E2D4;color:var(--ink);font-family:var(--font-cn);overflow-x:clip;font-size:16px}
+
+/* ===== 开门见喜：沿着厝檐回家 ===== */
+.gate-intro{position:fixed;inset:0;z-index:999;background:var(--paper);display:flex;align-items:center;justify-content:center;overflow:hidden;animation:gateAway .25s ease 1.55s forwards;pointer-events:none}
+.gate-copy{position:relative;z-index:3;text-align:center;animation:gateCopy .7s ease .15s both}
+.gate-copy small{display:block;color:var(--gold);font-size:9px;letter-spacing:.42em;margin-bottom:13px}
+.gate-copy strong{font-family:var(--font-serif);font-size:clamp(28px,9vw,44px);letter-spacing:.12em;color:#FFF9EE;text-shadow:0 2px 0 rgba(0,0,0,.12)}
+.gate-copy span{display:block;margin-top:12px;font-family:var(--font-hand);font-size:18px;color:#F4DCA9;letter-spacing:.12em}
+.gate-door{position:absolute;top:0;bottom:0;width:51%;background:linear-gradient(90deg,#741116,#A91820 45%,#7E1016);border-color:#D5A855;border-style:solid;transition:none;animation-duration:1.15s;animation-delay:1.1s;animation-fill-mode:forwards;animation-timing-function:cubic-bezier(.65,0,.25,1)}
+.gate-door::before{content:'';position:absolute;inset:19px;border:1px solid rgba(229,190,112,.65);background-image:linear-gradient(45deg,transparent 46%,rgba(229,190,112,.18) 47% 53%,transparent 54%),linear-gradient(-45deg,transparent 46%,rgba(229,190,112,.18) 47% 53%,transparent 54%);background-size:34px 34px}
+.gate-door::after{content:'囍';position:absolute;top:50%;width:55px;height:55px;border-radius:50%;background:#D7A849;color:#87151B;display:grid;place-items:center;font-family:var(--font-serif);font-size:27px;font-weight:900;box-shadow:0 0 0 5px #87151B,0 0 0 7px #D7A849}
+.gate-left{left:0;border-width:0 3px 0 0;animation-name:openLeft}.gate-right{right:0;border-width:0 0 0 3px;animation-name:openRight}
+.gate-left::after{right:-28px}.gate-right::after{left:-28px}
+.gate-roof{position:absolute;left:50%;top:-64px;width:125%;height:145px;transform:translateX(-50%);border:10px solid var(--jade);border-radius:0 0 50% 50%;z-index:5;box-shadow:0 7px 0 var(--gold)}
+@keyframes openLeft{to{transform:translateX(-103%)}}@keyframes openRight{to{transform:translateX(103%)}}
+@keyframes gateCopy{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes gateAway{to{visibility:hidden;opacity:0}}
+@media(prefers-reduced-motion:reduce){.gate-intro{display:none}}
 .spk{position:absolute;width:15px;height:15px;background:var(--red);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);opacity:0;animation:twinkle 2.4s ease-in-out infinite;z-index:5;pointer-events:none}
 .spk.gold{background:#E8B84B}
 .spk.s1{right:7%;top:12%}
@@ -117,9 +134,10 @@ section{position:relative}
 .hero-name{font-family:var(--font-big),var(--font-cn);font-weight:900;line-height:.98;letter-spacing:.02em}
 .hero-name .nm{display:block;font-size:clamp(44px,13vw,80px)}
 .hero-name .nm2{display:block;font-size:clamp(44px,13vw,80px);color:var(--red);margin-left:13vw;position:relative}
-.hero-name 
 .hero-geoloc{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
-.geo-chip{border:1.5px solid var(--ink);padding:7px 13px;font-size:11px;letter-spacing:.18em;font-weight:700;background:#FFFEFA;box-shadow:3px 3px 0 rgba(216,38,44,.85)}
+.hero-home-copy{margin-top:17px;font-family:var(--font-serif);font-size:15px;line-height:1.8;letter-spacing:.06em;color:rgba(20,20,20,.78)}
+.hero-home-copy strong{color:var(--red);font-weight:900}
+.geo-chip{white-space:nowrap;border:1.5px solid var(--ink);padding:7px 13px;font-size:11px;letter-spacing:.18em;font-weight:700;background:#FFFEFA;box-shadow:3px 3px 0 rgba(216,38,44,.85)}
 .geo-chip.red{background:var(--red);color:#fff;border-color:var(--red);box-shadow:3px 3px 0 var(--ink)}
 .photo-wrap{position:relative;margin:20px 6vw 0 4vw}
 .photo-paper{position:relative;background:#FFFEFA;padding:11px 11px 40px;border:1.5px solid var(--ink);transform:rotate(-2.2deg);box-shadow:8px 10px 0 rgba(216,38,44,.9),0 18px 40px rgba(20,20,20,.16);clip-path:polygon(1.2% 2%,26% 0.4%,52% 1.8%,78% .2%,99% 1.6%,98.6% 30%,99.8% 58%,98.4% 86%,99.4% 99%,72% 98.2%,46% 99.6%,20% 98.6%,.6% 99.4%,1.8% 70%,.2% 40%)}
@@ -153,11 +171,53 @@ section{position:relative}
 .marquee-track span{font-family:var(--font-big);font-size:15px;letter-spacing:.22em;white-space:nowrap;padding-right:38px}
 @keyframes mq{to{transform:translateX(-50%)}}
 
+/* ===== 归宁序章 ===== */
+.invitation-sec{padding:82px 0 76px;overflow:hidden;background:linear-gradient(180deg,#F6EFE3 0%,var(--paper) 100%)}
+.invitation-card{position:relative;padding:50px 26px 38px;border:2px solid var(--red-deep);background-color:#FFF9ED;background-image:repeating-linear-gradient(0deg,rgba(130,85,40,.025) 0 1px,transparent 1px 4px);box-shadow:7px 7px 0 var(--jade);clip-path:polygon(0 1%,9% 0,18% 1%,27% 0,36% 1%,45% 0,54% 1%,63% 0,72% 1%,81% 0,90% 1%,100% 0,99% 100%,90% 99%,81% 100%,72% 99%,63% 100%,54% 99%,45% 100%,36% 99%,27% 100%,18% 99%,9% 100%,0 99%)}
+.invitation-card::before,.invitation-card::after{content:'✦';position:absolute;color:var(--gold);font-size:17px}
+.invitation-card::before{left:13px;top:12px}.invitation-card::after{right:13px;bottom:12px}
+.invitation-eyebrow{font-size:10px;letter-spacing:.36em;color:var(--jade);font-weight:900;text-align:center}
+.invitation-title{font-family:var(--font-serif);font-size:clamp(30px,9vw,42px);letter-spacing:.12em;text-indent:.12em;text-align:center;margin:13px 0 22px;color:var(--red-deep)}
+.invitation-copy{font-family:var(--font-serif);font-size:16px;line-height:2.05;text-align:center;letter-spacing:.06em}
+.invitation-copy strong{color:var(--red);font-weight:900}
+.invitation-sign{margin-top:22px;text-align:center;font-family:var(--font-hand);font-size:20px;color:var(--jade)}
+.letter-mark{position:absolute;right:18px;top:15px;width:58px;height:58px;border:2px solid var(--red);color:var(--red);display:grid;place-items:center;text-align:center;font-family:var(--font-serif);font-size:13px;font-weight:900;line-height:1.25;transform:rotate(7deg);border-radius:3px}
+.letter-mark::after{content:'';position:absolute;inset:4px;border:1px dashed var(--red)}
+.letter-route{display:flex;align-items:center;justify-content:center;gap:9px;margin:22px 0 2px;color:rgba(20,20,20,.5);font-size:9px;letter-spacing:.2em}
+.letter-route i{height:1px;width:30px;background:var(--red);position:relative}.letter-route i::after{content:'›';position:absolute;right:-2px;top:-9px;color:var(--red);font-size:15px}
+.porcelain-band{height:34px;margin:30px -22px -76px;background-color:var(--jade);background-image:radial-gradient(circle at 12px 12px,#F0C75E 0 3px,transparent 3.5px),radial-gradient(circle at 30px 22px,#FFFCF6 0 4px,transparent 4.5px),radial-gradient(circle at 48px 10px,#D8262C 0 4px,transparent 4.5px);background-size:60px 34px;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.roofline{height:54px;position:relative;margin:0 -22px 28px;overflow:hidden}
+.roofline::before{content:'';position:absolute;left:50%;top:25px;width:112%;height:58px;border:3px solid var(--red);border-radius:50% 50% 0 0;transform:translateX(-50%) rotate(-2deg)}
+.roofline::after{content:'凤凰于飞 · 归宁成礼 · 满堂欢喜';position:absolute;left:50%;top:7px;transform:translateX(-50%);white-space:nowrap;background:var(--paper);padding:0 13px;font-family:var(--font-serif);font-size:10px;letter-spacing:.3em;color:var(--jade);font-weight:900}
+.arrival-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:24px}
+.arrival-step{min-height:104px;border:1.5px solid var(--ink);padding:12px 10px;background:#FFFEFA;position:relative}
+.arrival-step b{display:block;font-family:var(--font-big);font-size:22px;color:var(--red)}
+.arrival-step strong{display:block;font-size:13px;margin:8px 0 4px}
+.arrival-step span{font-size:10px;line-height:1.55;color:rgba(20,20,20,.58)}
+.arrival-step:nth-child(2){transform:translateY(7px);background:#FFF6E8}.arrival-step:nth-child(3){background:#F0F5F0}
+
+/* 潮绣与嵌瓷的吉祥纹样，线描化避免民俗堆砌 */
+.auspicious-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:34px 0 0}
+.auspicious-item{text-align:center;color:var(--jade)}
+.auspicious-item svg{width:62px;height:62px;margin:auto;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.auspicious-item:nth-child(2){color:var(--red)}.auspicious-item:nth-child(3){color:var(--gold)}
+.auspicious-item span{display:block;font-family:var(--font-serif);font-size:10px;letter-spacing:.2em;margin-top:6px;font-weight:900}
+
 /* ===== 水彩背景层 ===== */
 .wc-caption small{display:block;font-style:normal;font-size:9px;letter-spacing:.24em;color:rgba(20,20,20,.35);margin-top:2px}
 
 /* ===== 日期区 ===== */
 .date-sec{padding:84px 0 70px;position:relative}
+.section-human-title{font-family:var(--font-serif);font-size:clamp(27px,8vw,38px);font-weight:900;line-height:1.25;margin:20px 0 8px}
+.section-human-title em{font-style:normal;color:var(--red)}
+.section-human-copy{font-size:14px;line-height:1.9;color:rgba(20,20,20,.67);letter-spacing:.04em;margin-bottom:8px}
+.almanac{position:relative;border:2px solid var(--ink);background:#FFFDF7;padding:18px 16px 19px;margin-top:18px;box-shadow:6px 6px 0 var(--red)}
+.almanac::before{content:'通胜';position:absolute;right:13px;top:13px;border:2px solid var(--red);color:var(--red);padding:5px 4px;font-family:var(--font-serif);font-size:11px;letter-spacing:.18em;writing-mode:vertical-rl}
+.almanac-head{display:flex;justify-content:space-between;align-items:center;padding-right:38px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:10px}
+.almanac-head b{font-family:var(--font-serif);font-size:17px}.almanac-head span{font-size:10px;color:rgba(20,20,20,.5);letter-spacing:.16em}
+.almanac-row{display:grid;grid-template-columns:35px 1fr;gap:11px;align-items:start;padding:6px 42px 6px 0;font-size:12px;line-height:1.6}
+.almanac-row b{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--jade);color:#fff;font-family:var(--font-serif)}
+.almanac-row.red b{background:var(--red)}
 .home-note{position:absolute;right:5%;top:6%;background:var(--red);color:#FFFEFA;text-align:center;padding:10px 14px 9px;border-radius:3px;transform:rotate(5deg);box-shadow:4px 4px 0 var(--ink);animation:notePop .55s cubic-bezier(.2,1.4,.4,1) .9s both;z-index:5}
 .home-note b{display:block;font-family:var(--font-hand);font-size:21px;letter-spacing:.18em;font-weight:400}
 .home-note span{display:block;font-size:8px;letter-spacing:.22em;margin-top:4px;opacity:.92}
@@ -196,6 +256,8 @@ section{position:relative}
 .place-sec h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(30px,9vw,44px);line-height:1.2;margin:14px 0 6px}
 .place-sec h2 em{font-style:normal;color:var(--red)}
 .place-sub{font-size:12px;letter-spacing:.26em;color:rgba(20,20,20,.55);font-weight:500}
+.place-young{font-family:var(--font-hand);font-size:19px;line-height:1.55;color:var(--jade);margin-top:9px}
+.place-seal{position:absolute;right:22px;top:60px;width:62px;height:62px;border:3px double var(--red);border-radius:50%;display:grid;place-items:center;color:var(--red);font-family:var(--font-serif);font-weight:900;font-size:13px;line-height:1.15;text-align:center;transform:rotate(9deg);opacity:.9}
 .place-name{font-size:clamp(21px,6vw,26px);font-weight:900;margin-top:24px;letter-spacing:.04em}
 .place-name .hall{color:var(--red)}
 .place-tags{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
@@ -216,6 +278,9 @@ section{position:relative}
 .sec-title h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(24px,7vw,32px)}
 .sec-title .no{font-family:var(--font-big);font-size:12px;color:var(--red)}
 .sec-title .rule{flex:1;height:1.5px;background:var(--line)}
+.sec-lead{font-family:var(--font-hand);font-size:19px;color:var(--jade);margin:-14px 0 25px;line-height:1.55}
+.tea-scene{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center;margin:0 0 27px;padding:18px;border:1.5px solid var(--ink);background:#F5EFE2;box-shadow:4px 4px 0 var(--gold)}
+.tea-scene svg{width:120px;height:88px}.tea-scene h3{font-family:var(--font-serif);font-size:18px;color:var(--red);margin-bottom:6px}.tea-scene p{font-size:12px;line-height:1.75;color:rgba(20,20,20,.65)}
 .ticket{position:relative;background:#FFFEFA;border:2px solid var(--ink);box-shadow:6px 6px 0 rgba(20,20,20,.85)}
 .ticket::before,.ticket::after{content:'';position:absolute;width:22px;height:22px;background:var(--paper);border:2px solid var(--ink);border-radius:50%;top:50%;transform:translateY(-50%)}
 .ticket::before{left:-13px}
@@ -290,21 +355,28 @@ section{position:relative}
 .rsvp-done .seal-big span{font-size:8px;letter-spacing:.3em;font-weight:700}
 .rsvp-done p{font-family:var(--font-hand);font-size:21px;color:var(--ink)}
 .rsvp-done small{display:block;margin-top:10px;font-size:11px;color:rgba(20,20,20,.55);letter-spacing:.1em;line-height:1.9}
-.ticket-stub{display:none;margin:22px auto 0;max-width:320px;background:#FFFEFA;border:2px solid var(--ink);box-shadow:5px 5px 0 rgba(216,38,44,.85)}
+.ticket-stub{display:none;margin:22px auto 0;max-width:320px;background:#B5141A;color:#FFF8EA;border:2px solid var(--ink);box-shadow:5px 5px 0 var(--gold)}
 .ticket-stub.show{display:block;animation:stampIn .8s cubic-bezier(.2,1.4,.4,1) .15s backwards}
-.stub-head{display:flex;justify-content:space-between;align-items:center;background:var(--ink);color:#FFFEFA;padding:8px 14px}
+.stub-head{display:flex;justify-content:space-between;align-items:center;background:#7E1016;color:#FFFEFA;padding:8px 14px;border-bottom:1px solid rgba(255,248,234,.4)}
 .stub-head b{font-size:11px;letter-spacing:.34em}
 .stub-head i{font-style:normal;font-size:9px;letter-spacing:.14em;opacity:.8}
 .stub-body{padding:14px 16px 12px}
 .stub-row{display:flex;justify-content:space-between;font-size:13px;font-weight:700;letter-spacing:.08em;padding:5px 0}
-.stub-row span{color:rgba(20,20,20,.5);font-size:10px;letter-spacing:.26em;padding-top:2px}
+.stub-row span{color:rgba(255,248,234,.65);font-size:10px;letter-spacing:.26em;padding-top:2px}
 .stub-barcode{display:flex;gap:2px;height:34px;margin-top:10px;align-items:stretch}
-.stub-barcode i{background:var(--ink);flex:0 0 auto}
-.stub-foot{font-size:8.5px;letter-spacing:.3em;text-align:center;color:rgba(20,20,20,.5);border-top:1.5px dashed var(--line);padding:7px 0 9px}
+.stub-barcode i{background:#FFF8EA;flex:0 0 auto}
+.stub-foot{font-size:8.5px;letter-spacing:.3em;text-align:center;color:#FFF8EA;border-top:1.5px dashed rgba(255,248,234,.45);padding:7px 0 9px}
 .stub-edit{display:block;margin:10px auto 16px;font-size:11px;letter-spacing:.2em;color:var(--red);font-weight:700;text-decoration:underline;text-underline-offset:4px}
 
 /* ===== 页脚 ===== */
 footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;position:relative}
+.home-ending{position:relative;height:230px;background:#16140F;overflow:hidden;border-bottom:2px solid #E0B65D}
+.home-ending::before{content:'';position:absolute;inset:22px 12% 0;border:8px solid #6E1719;border-bottom:0;border-radius:100px 100px 0 0;box-shadow:inset 0 0 40px rgba(0,0,0,.65)}
+.home-ending::after{content:'';position:absolute;left:50%;bottom:24px;width:168px;height:64px;background:radial-gradient(ellipse at center,#C44027 0 44%,#8F241C 45% 64%,#E0B65D 65% 69%,transparent 70%);transform:translateX(-50%);filter:drop-shadow(0 0 22px rgba(241,183,76,.5))}
+.home-lamp{position:absolute;left:50%;top:32px;transform:translateX(-50%);width:48px;height:55px;border-radius:8px 8px 22px 22px;background:#D9292F;box-shadow:0 0 34px #F4B94F;z-index:2}.home-lamp::before{content:'囍';position:absolute;inset:0;display:grid;place-items:center;color:#F7D88F;font-family:var(--font-serif);font-size:21px;font-weight:900}.home-lamp::after{content:'';position:absolute;left:22px;top:53px;width:3px;height:34px;background:#E5B255;box-shadow:-7px 8px 0 #E5B255,7px 8px 0 #E5B255}
+.round-guests{position:absolute;left:50%;bottom:43px;width:235px;height:95px;transform:translateX(-50%);z-index:1}
+.round-guests i{position:absolute;width:25px;height:32px;border-radius:50% 50% 43% 43%;background:#312B22;border:2px solid #D39D54}.round-guests i:nth-child(1){left:3px;top:24px}.round-guests i:nth-child(2){left:40px;top:2px}.round-guests i:nth-child(3){right:40px;top:2px}.round-guests i:nth-child(4){right:3px;top:24px}
+.ending-copy{position:absolute;left:0;right:0;bottom:5px;text-align:center;color:#F3D59B;font-family:var(--font-serif);font-size:11px;letter-spacing:.3em;z-index:3}
 .foot-tear{display:block;width:100%;height:26px;margin-top:-25px}
 .rsvp-sec + footer .foot-tear{background:var(--paper)}
 .foot-inner{max-width:640px;margin:0 auto;padding:44px 22px 0;text-align:center}
@@ -312,6 +384,8 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
 .foot-names i{font-style:normal;display:inline-block;transform:rotate(-6deg) translateY(-6px);font-size:.5em;padding:0 6px}
 .foot-invite{font-size:13px;letter-spacing:.5em;margin-top:14px;text-indent:.5em;opacity:.94}
 .foot-contact{margin-top:26px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.contact-toggle{margin-top:24px;color:#fff;border-bottom:1px solid rgba(255,255,255,.7);padding:7px 2px;font-size:12px;letter-spacing:.22em;font-weight:700}
+.foot-contact[hidden]{display:none}
 .call-btn{display:inline-flex;flex-direction:column;align-items:center;gap:5px;border:2px solid rgba(255,254,250,.85);border-radius:18px;padding:12px 24px 10px;color:#FFFEFA;font-weight:900;font-size:14px;letter-spacing:.12em;text-decoration:none;background:rgba(255,254,250,.08);transition:transform .15s, background .2s;box-shadow:0 3px 10px rgba(0,0,0,.18)}
 .call-btn:active{transform:scale(.94);background:rgba(0,0,0,.22)}
 .call-btn svg{width:15px;height:15px;flex:none}
@@ -328,6 +402,7 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
   .notes-row{grid-template-columns:1fr 1fr 1fr}
   .note-card:nth-child(3){grid-column:span 1}
 }
+@media(max-width:380px){.tea-scene{grid-template-columns:95px 1fr;gap:12px;padding:14px}.tea-scene svg{width:95px}.arrival-step{padding:10px 7px}.arrival-step strong{font-size:12px}}
 #musicBtn{position:fixed;top:12px;right:12px;z-index:70;width:50px;height:50px;border-radius:50%;background:rgba(255,254,250,.93);border:2px solid var(--ink);box-shadow:3px 3px 0 rgba(20,20,20,.78);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent}
 #musicBtn svg{width:30px;height:30px}
 #musicBtn .disc{transform-origin:12px 12px;opacity:.94}
@@ -344,6 +419,23 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
 </style>
 </head>
 <body>
+
+<div class="gate-intro" aria-hidden="true">
+<script>
+try{
+  var __gt = +localStorage.getItem('gateShownAt') || 0;
+  if (Date.now() - __gt < 864e5){
+    var __g = document.currentScript.nextElementSibling;
+    if (__g && __g.classList.contains('gate-inner')) __g = null;
+    var __gi = document.querySelector('.gate-intro');
+    if (__gi) __gi.style.display = 'none';
+  } else { localStorage.setItem('gateShownAt', Date.now()); }
+}catch(e){}
+</script>
+  <div class="gate-roof"></div>
+  <div class="gate-door gate-left"></div><div class="gate-door gate-right"></div>
+  <div class="gate-copy"><small>RETURNING HOME</small><strong>沿着厝檐，回家吃席</strong><span>归宁之喜 · 满堂欢喜</span></div>
+</div>
 
 <img src="assets/share-cover.jpg" alt="" style="position:absolute;left:0;top:0;width:300px;height:300px;opacity:0.001;pointer-events:none;z-index:-1">
 <button id="musicBtn" aria-label="背景音乐开关" title="背景音乐">
@@ -372,12 +464,13 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
       <span class="nm">舒有为</span>
       <span class="nm2"><i class="amp">&</i>陈璟思</span>
     </h1>
-    <div class="hh-sub reveal is-in"><span>回门宴</span></div>
+    <div class="hh-sub reveal is-in"><span>归宁喜宴</span></div>
     <div class="hero-geoloc reveal is-in">
       <span class="geo-chip red">10.11 周日</span>
-      <span class="geo-chip">18:00</span>
+      <span class="geo-chip">17:30 恭候 · 18:00 开席</span>
       <span class="geo-chip">汕头 · 皇城酒店</span>
     </div>
+    <p class="hero-home-copy reveal is-in"><strong>嫁出去的女儿回家啦，</strong><br>这次，还多带一个。</p>
   </div>
   <div class="wrap photo-wrap">
     <div class="hero-blob"></div>
@@ -385,19 +478,40 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
     <div class="photo-paper reveal">
       <i class="tape tape--1"></i><i class="tape tape--2"></i>
       <img src="assets/couple.jpg" alt="舒有为与陈璟思">
-      <p class="ph-cap">— <b>10.11</b>，来见证这一刻</p>
+      <p class="ph-cap">— <b>10.11</b>，沿着喜气回家来</p>
     </div>
-    <div class="photo-note reveal"><p>10.11 我们在等你</p></div>
+    <div class="photo-note reveal"><p>这一席，想和你一起坐</p></div>
   </div>
   <div class="hero-scroll reveal is-in"><a href="#date-sec"><span>SCROLL</span><i></i></a></div>
 </header>
 
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>SHU & CHEN — SAVE THE DATE — 2026.10.11 — 汕头皇城酒店 — 恭候光临 —&nbsp;</span>
-    <span>SHU & CHEN — SAVE THE DATE — 2026.10.11 — 汕头皇城酒店 — 恭候光临 —&nbsp;</span>
+    <span>归宁之喜 — 回家吃席 — 2026.10.11 — 汕头皇城酒店 — 欢喜相见 —&nbsp;</span>
+    <span>归宁之喜 — 回家吃席 — 2026.10.11 — 汕头皇城酒店 — 欢喜相见 —&nbsp;</span>
   </div>
 </div>
+
+<!-- 邀请序章 -->
+<section class="invitation-sec">
+  <div class="wrap">
+    <div class="roofline reveal" aria-hidden="true"></div>
+    <div class="invitation-card reveal">
+      <div class="letter-mark">归宁<br>喜帖</div>
+      <p class="invitation-eyebrow">NO.01 · THE INVITATION</p>
+      <h2 class="invitation-title">吾家有喜</h2>
+      <p class="invitation-copy">我们结婚啦。<br><br>关于这一天，想过很多种表达。<br>最后还是觉得——<br><strong>有你在场，就是最好的喜事。</strong><br><br>所以，喜帖送到你手里。<br>十月十一，回汕头，一起吃顿喜酒。</p>
+      <div class="letter-route"><span>一封家书</span><i></i><span>捎回汕头</span></div>
+      <p class="invitation-sign">舒有为 × 陈璟思 敬邀</p>
+    </div>
+    <div class="auspicious-panel reveal" aria-label="潮汕吉祥纹样">
+      <div class="auspicious-item"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M10 45c11-3 15-13 18-24 3 8 9 13 18 15-5 2-8 5-10 10 7-1 12 1 17 6-11 0-18 1-24 8-1-8-5-12-13-15-3-1-5-1-6 0z"/><path d="M27 22c-5-7-2-13 5-16 0 7 4 10 10 12-5 2-9 3-15 4z"/><path d="M17 43c-2-7-7-10-13-11 5-4 10-4 16-1"/></svg><span>凤凰 · 和美</span></div>
+      <div class="auspicious-item"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M20 16c8-7 18-7 26 0 8 8 7 22 0 32-5 7-9 10-13 12-5-2-10-6-15-13-7-10-6-23 2-31z"/><path d="M25 13c0-5 3-8 8-9 1 5 0 8-3 11M22 22c7 4 16 4 23 0"/><circle cx="25" cy="34" r="2"/><circle cx="34" cy="31" r="2"/><circle cx="42" cy="36" r="2"/><circle cx="29" cy="43" r="2"/><circle cx="38" cy="46" r="2"/></svg><span>石榴 · 满堂</span></div>
+      <div class="auspicious-item"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 27c-13-7-15-16-8-21 6 0 9 5 8 13 2-9 7-13 13-10 5 7 1 14-8 19 10-4 17-1 18 6-3 7-11 8-20 2 7 8 7 16 1 20-8-1-11-8-8-18-6 9-14 11-19 6-1-8 6-13 19-13-11-2-16-8-13-14 6-4 12-1 17 10z"/><circle cx="32" cy="31" r="4"/></svg><span>牡丹 · 富贵</span></div>
+    </div>
+    <div class="porcelain-band" aria-hidden="true"></div>
+  </div>
+</section>
 
 <!-- 日期 -->
 <section class="date-sec" id="date-sec">
@@ -407,8 +521,15 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
   <svg class="fwx fw1" viewBox="0 0 60 60" aria-hidden="true"><g stroke="#D8262C" stroke-width="2.4" stroke-linecap="round"><line x1="30" y1="2" x2="30" y2="12"/><line x1="30" y1="48" x2="30" y2="58"/><line x1="2" y1="30" x2="12" y2="30"/><line x1="48" y1="30" x2="58" y2="30"/><line x1="10" y1="10" x2="17" y2="17"/><line x1="43" y1="43" x2="50" y2="50"/><line x1="50" y1="10" x2="43" y2="17"/><line x1="17" y1="43" x2="10" y2="50"/></g><circle cx="30" cy="30" r="3.2" fill="#E8B84B"/></svg>
   <div class="wrap">
     <div class="date-kicker-row reveal">
-      <span class="kicker">THE DATE</span>
+      <span class="kicker">NO.02 · THE DATE</span>
       <span class="cn">丙午马年 · 九月初二</span>
+    </div>
+    <h2 class="section-human-title reveal">良辰<em>已定</em></h2>
+    <p class="section-human-copy reveal">十月十一，周日。<br>别睡懒觉，晚上来吃席。</p>
+    <div class="almanac reveal">
+      <div class="almanac-head"><b>丙午年 · 九月初二</b><span>星期日</span></div>
+      <div class="almanac-row red"><b>宜</b><span>归宁 · 赴宴 · 见老友 · 沾喜气</span></div>
+      <div class="almanac-row"><b>候</b><span>十七时三十分迎宾 · 十八时开席</span></div>
     </div>
     <div class="reveal">
       <div class="date-big"><span class="yr">'26</span> <span class="mm">10.</span><span class="dd">11</span>
@@ -416,8 +537,8 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
       </div>
     </div>
     <dl class="date-grid reveal">
-      <dt>这天是</dt><dd>周日 <span class="hand">别睡懒觉，来吃席</span></dd>
-      <dt>入席</dt><dd><em>18:00</em> 迎宾开席</dd>
+      <dt>这天是</dt><dd>周日 <span class="hand">宜回家，宜团圆</span></dd>
+      <dt>恭候</dt><dd><em>17:30</em> 迎宾 · <em>18:00</em> 开席</dd>
       <dt>农历</dt><dd>二〇二六年 九月初二</dd>
     </dl>
     <div class="luck-tag reveal"><i>✦</i>宜赴宴 · 宜欢喜 · 宜沾喜气</div>
@@ -432,19 +553,26 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
 
 <!-- 地点 -->
 <section class="place-sec">
+  <div class="place-seal" aria-hidden="true">汕头<br>有喜</div>
   <div class="wrap">
     <div class="place-head reveal">
-      <span class="place-no">NO.02</span>
+      <span class="place-no">NO.03</span>
       <span class="kicker">THE PLACE</span>
     </div>
-    <h2 class="reveal"><em>三步到喜宴</em></h2>
+    <h2 class="reveal">喜筵有约<br><em>三步到喜宴</em></h2>
     <p class="place-sub reveal">COME AS YOU ARE · LEAVE WITH JOY</p>
+    <p class="place-young reveal">四楼龙凤厅。找不到没关系，导航比新郎靠谱。</p>
     <p class="place-name reveal">皇城酒店<span class="hall">· 四楼龙凤厅</span></p>
     <div class="place-tags reveal">
       <span>龙湖区 · 黄山路52号</span><span>四楼龙凤厅</span><span>10.11 周日 18:00</span>
     </div>
     <div class="place-actions reveal">
-      <a class="btn btn-red" id="navBtn" href="https://uri.amap.com/search?keyword=%E7%9A%87%E5%9F%8E%E9%85%92%E5%BA%97%28%E6%B1%95%E5%A4%B4%E9%AB%98%E9%93%81%E7%AB%99%E5%BA%97%29&city=440500" target="_blank" rel="noopener">导航去搂席 <i class="nav-arr">↗</i></a>
+      <a class="btn btn-red" id="navBtn" href="https://uri.amap.com/search?keyword=%E7%9A%87%E5%9F%8E%E9%85%92%E5%BA%97%28%E6%B1%95%E5%A4%B4%E9%AB%98%E9%93%81%E7%AB%99%E5%BA%97%29&city=440500" target="_blank" rel="noopener">导航去吃席 <i class="nav-arr">↗</i></a>
+    </div>
+    <div class="arrival-steps reveal" aria-label="三步到喜宴">
+      <div class="arrival-step"><b>01</b><strong>到皇城酒店</strong><span>龙湖区黄山路52号</span></div>
+      <div class="arrival-step"><b>02</b><strong>上四楼</strong><span>找到龙凤厅</span></div>
+      <div class="arrival-step"><b>03</b><strong>找到我们</strong><span>然后放心吃席</span></div>
     </div>
     <div class="map-window" id="mapWindow"><div class="map-tip">手绘路线 · 跟着红点走</div>
           <svg class="handmap" viewBox="0 0 400 210" role="img" aria-label="手绘路线图：从汕头站步行至皇城酒店">
@@ -483,6 +611,12 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
               <rect x="94" y="130" width="112" height="24" rx="12" fill="#FFFEFA" stroke="#D8262C" stroke-width="2"/>
               <text x="150" y="146" text-anchor="middle" font-size="11" font-weight="900" fill="#D8262C" letter-spacing="1">皇城酒店 · 四楼</text>
             </g>
+            <g transform="translate(96 82)" aria-label="皇城酒店手绘门面">
+              <path d="M0 45V16h13V7h31v9h13v29" fill="#FFF7E7" stroke="#2A2620" stroke-width="2"/>
+              <path d="M8 45V25h41v20M22 45V31h13v14" fill="none" stroke="#D8262C" stroke-width="2"/>
+              <path d="M13 7l15-6 16 6" fill="none" stroke="#21665B" stroke-width="2"/>
+              <circle cx="11" cy="25" r="3" fill="#D8262C"/><circle cx="47" cy="25" r="3" fill="#D8262C"/>
+            </g>
             <g transform="translate(28 32)">
               <circle r="13" fill="#FFFEFA" stroke="#2A2620" stroke-width="2"/>
               <path d="M0 -8 L4 6 L0 3 L-4 6 Z" fill="#D8262C"/>
@@ -498,9 +632,14 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
 <section class="flow-sec">
   <i class="spk s6 gold"></i>
   <div class="wrap">
-    <div class="sec-title reveal"><span class="no">NO.03</span><h2>当日流程</h2><i class="rule"></i></div>
+    <div class="sec-title reveal"><span class="no">NO.04</span><h2>今日喜程</h2><i class="rule"></i></div>
+    <p class="sec-lead reveal">今天没什么复杂安排：先见面，再吃席，最后尽兴而归。</p>
+    <div class="tea-scene reveal">
+      <svg viewBox="0 0 120 88" aria-label="工夫茶线描插画"><g fill="none" stroke="#21665B" stroke-width="2"><ellipse cx="55" cy="71" rx="50" ry="11"/><path d="M34 57c0-15 5-26 22-26 18 0 23 11 23 26-10 9-35 9-45 0z"/><path d="M44 31c1-10 6-15 13-15s12 5 13 15M79 41c16-2 18 17 1 19"/><path d="M16 56c0-7 5-11 12-11s12 4 12 11M83 57c0-7 5-11 12-11s12 4 12 11"/><path d="M19 44h18M86 44h18"/></g><g fill="#D8262C"><circle cx="55" cy="7" r="2"/><circle cx="49" cy="11" r="1.5"/><circle cx="61" cy="12" r="1.5"/></g></svg>
+      <div><h3>先食茶，再入席</h3><p>潮汕人的见面，从一杯工夫茶开始。先坐下来叙叙旧，再慢慢等人齐、等菜香。</p></div>
+    </div>
     <div class="ticket reveal">
-      <div class="ticket-head"><b>DAY SCHEDULE</b><i>10.11 · 周日</i></div>
+      <div class="ticket-head"><b>食桌指南</b><i>10.11 · 周日</i></div>
           <div class="df-row">
         <span class="df-time">17:30</span>
         <span class="df-what">迎宾入席</span>
@@ -519,11 +658,12 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
 <!-- 便签 -->
 <section class="notes-sec">
   <div class="wrap">
-    <div class="sec-title reveal"><span class="no">NO.04</span><h2>贴心提示</h2><i class="rule"></i></div>
+    <div class="sec-title reveal"><span class="no">NO.05</span><h2>赴宴小帖</h2><i class="rule"></i></div>
+    <p class="sec-lead reveal">不用拘束，开心就好。把这里当家里，把这一桌当团圆饭。</p>
     <div class="notes-row">
-      <div class="note-card reveal"><p class="nc-k">着装</p><p class="nc-t">不必正装，舒服自在就好</p></div>
-      <div class="note-card reveal"><p class="nc-k">到场</p><p class="nc-t">提前一刻钟</p><p class="nc-s">找到座位，喝杯茶歇歇</p></div>
-      <div class="note-card reveal"><p class="nc-k">宴后</p><p class="nc-t">喝酒别开车</p><p class="nc-s">代驾我们帮你想好了</p></div>
+      <div class="note-card reveal"><p class="nc-k">来做客</p><p class="nc-t">无须拘礼，舒服自在就好</p><p class="nc-s">穿你喜欢的衣服，带着好心情来</p></div>
+      <div class="note-card reveal"><p class="nc-k">先食茶</p><p class="nc-t">提前一刻钟</p><p class="nc-s">坐下来饮杯茶，慢慢见面</p></div>
+      <div class="note-card reveal"><p class="nc-k">再围桌</p><p class="nc-t">人到齐，才叫团圆</p><p class="nc-s">喝酒不开车，平安回家最重要</p></div>
     </div>
   </div>
 </section>
@@ -531,11 +671,11 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
 <!-- RSVP -->
 <section class="rsvp-sec" id="rsvpCard">
   <div class="wrap">
-    <div class="sec-title reveal"><span class="no">NO.05</span><h2>回执登记</h2><i class="rule"></i></div>
+    <div class="sec-title reveal"><span class="no">NO.06</span><h2>这一席，为你留</h2><i class="rule"></i></div>
     <div class="rsvp-card reveal" id="rsvpBox">
       <form id="rsvpForm" novalidate>
         <p class="rsvp-title">你会来吧？</p>
-        <p class="rsvp-sub">女家回门宴 · 请留下信息为你留座</p>
+        <p class="rsvp-sub">女家归宁喜宴 · 留下信息，我们好为你留座</p>
         <div class="field">
           <label>姓名 <em>*</em></label>
           <input id="fName" type="text" placeholder="怎么称呼你" maxlength="20" autocomplete="name">
@@ -552,17 +692,17 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
           <label>手机号 <em>*</em></label>
           <input id="fPhone" type="tel" inputmode="numeric" placeholder="方便我们联系你" maxlength="11" autocomplete="tel">
         </div>
-        <button type="submit" class="rsvp-submit" id="rsvpSubmit">提交回执</button>
-        <p class="rsvp-handnote">—— 提交后我们会盖一个章 ——</p>
+        <button type="submit" class="rsvp-submit" id="rsvpSubmit">落款 · 盖喜印</button>
+        <p class="rsvp-handnote">—— 名字写下，喜印落定 ——</p>
       </form>
       <div class="rsvp-done" id="rsvpDone">
         <div class="seal-big"><b>已收到</b><span>RSVP RECEIVED</span></div>
-        <p id="doneText">好嘞，座给你留着！</p>
+        <p id="doneText">好嘞，这一席给你留好了！</p>
         <small>如需修改，点击下方按钮即可<br>有任何问题直接联系新郎新娘</small>
         <button class="stub-edit" id="stubEdit" type="button">点此修改回执</button>
       </div>
       <div class="ticket-stub" id="ticket">
-        <div class="stub-head"><b>SEAT STUB</b><i>舒有为 & 陈璟思 回门宴</i></div>
+        <div class="stub-head"><b>囍宴入场券</b><i>RETURN HOME BANQUET</i></div>
         <div class="stub-body">
           <div class="stub-row"><span>宾客</span><b id="tkName">—</b></div>
           <div class="stub-row"><span>人数</span><b id="tkCount">—</b></div>
@@ -571,7 +711,7 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
           <div class="stub-row"><span>性质</span><b>女家回门宴 · 敬备喜筵</b></div>
           <div class="stub-barcode" id="tkBarcode"></div>
         </div>
-        <div class="stub-foot">凭此赴宴 · SEE YOU THERE</div>
+        <div class="stub-foot">这一席，给你留好了 · SEE YOU THERE</div>
       </div>
     </div>
   </div>
@@ -579,17 +719,23 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
 
 <footer>
   <div class="foot-tear"></div>
+  <div class="home-ending" aria-label="屋内亮灯，一家人围桌团圆">
+    <div class="home-lamp"></div>
+    <div class="round-guests"><i></i><i></i><i></i><i></i></div>
+    <p class="ending-copy">屋里有灯 · 桌上有菜 · 身边有你</p>
+  </div>
   <i class="spk s7"></i>
   <i class="spk s8 gold"></i>
   <svg class="fwx fw2" viewBox="0 0 60 60" aria-hidden="true"><g stroke="#E8B84B" stroke-width="2.4" stroke-linecap="round"><line x1="30" y1="2" x2="30" y2="12"/><line x1="30" y1="48" x2="30" y2="58"/><line x1="2" y1="30" x2="12" y2="30"/><line x1="48" y1="30" x2="58" y2="30"/><line x1="10" y1="10" x2="17" y2="17"/><line x1="43" y1="43" x2="50" y2="50"/><line x1="50" y1="10" x2="43" y2="17"/><line x1="17" y1="43" x2="10" y2="50"/></g><circle cx="30" cy="30" r="3.2" fill="#FFFEFA"/></svg>
   <div class="foot-inner">
     <p class="foot-names">舒有为<i>&</i>陈璟思</p>
     <p class="foot-invite">敬邀 · 2026.10.11 · 汕头</p>
-    <div class="foot-contact">
+    <button class="contact-toggle" id="contactToggle" type="button" aria-expanded="false">赴宴有疑问？联系女方家人 ↓</button>
+    <div class="foot-contact" id="footContact" hidden>
       <div class="call-item"><a class="call-btn" href="tel:+8615767942098"><span class="call-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>联系新娘父亲</span><span class="call-name">陈在标</span></a></div>
       <div class="call-item"><a class="call-btn" href="tel:+8618923669498"><span class="call-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>联系新娘母亲</span><span class="call-name">郑曼莎</span></a></div>
     </div>
-    <p class="foot-hand">喜酒已备，就等你来</p>
+    <p class="foot-hand">喜酒已备，就等你来<br>那天，等你回家吃席</p>
     <p class="foot-fine">SHANTOU · HUANGCHENG HOTEL · 4F BANQUET HALL</p>
   </div>
 </footer>
@@ -644,6 +790,19 @@ function toast(msg){
   clearTimeout(t._tm); t._tm = setTimeout(()=>t.classList.remove('show'), 2400);
 }
 
+/* ===== 页脚联系人折叠 ===== */
+(function(){
+  const btn = document.getElementById('contactToggle');
+  const box = document.getElementById('footContact');
+  if(!btn || !box) return;
+  btn.addEventListener('click', function(){
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    box.hidden = open;
+    btn.textContent = open ? '赴宴有疑问？联系女方家人 ↓' : '收起联系方式 ↑';
+  });
+})();
+
 /* ===== RSVP ===== */
 (function(){
   const form = document.getElementById('rsvpForm');
@@ -659,7 +818,7 @@ function toast(msg){
   function showDone(data){
     form.style.display = 'none';
     done.classList.add('show');
-    document.getElementById('doneText').textContent = data.name + '，好嘞！座给你留着' +
+    document.getElementById('doneText').textContent = data.name + '，好嘞！这一席给你留好了' +
       '';
     document.getElementById('tkName').textContent = data.name;
     document.getElementById('tkCount').textContent = data.count + ' 位';
