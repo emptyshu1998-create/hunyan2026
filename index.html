@@ -83,7 +83,7 @@ body{background:#E8E2D4;color:var(--ink);font-family:var(--font-cn);overflow-x:c
 @keyframes gateCopy{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes gateAway{to{visibility:hidden;opacity:0}}
 @media(prefers-reduced-motion:reduce){.gate-intro{display:none}}
-.spk{position:absolute;width:15px;height:15px;background:var(--red);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);opacity:0;animation:twinkle 2.4s ease-in-out infinite;z-index:5;pointer-events:none}
+.spk{position:absolute;width:15px;height:15px;background:var(--red);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);opacity:0;animation:twinkle 2.4s ease-in-out infinite;z-index:1;pointer-events:none}
 .spk.gold{background:#E8B84B}
 .spk.s1{right:7%;top:12%}
 .spk.s2{left:1.5%;top:3%}
@@ -185,12 +185,12 @@ section{position:relative}
 .invitation-card{position:relative;padding:50px 26px 38px;border:2px solid var(--red-deep);background-color:#FFF9ED;background-image:repeating-linear-gradient(0deg,rgba(130,85,40,.025) 0 1px,transparent 1px 4px);box-shadow:7px 7px 0 var(--jade);clip-path:polygon(0 1%,9% 0,18% 1%,27% 0,36% 1%,45% 0,54% 1%,63% 0,72% 1%,81% 0,90% 1%,100% 0,99% 100%,90% 99%,81% 100%,72% 99%,63% 100%,54% 99%,45% 100%,36% 99%,27% 100%,18% 99%,9% 100%,0 99%)}
 .invitation-card::before,.invitation-card::after{content:'✦';position:absolute;color:var(--gold);font-size:17px}
 .invitation-card::before{left:13px;top:12px}.invitation-card::after{right:13px;bottom:12px}
-.invitation-eyebrow{font-size:10px;letter-spacing:.36em;color:var(--jade);font-weight:900;text-align:center}
+.invitation-eyebrow{font-size:10px;letter-spacing:.14em;color:var(--jade);font-weight:900;text-align:center}
 .invitation-title{font-family:var(--font-serif);font-size:clamp(30px,9vw,42px);letter-spacing:.12em;text-indent:.12em;text-align:center;margin:13px 0 22px;color:var(--red-deep)}
 .invitation-copy{font-family:var(--font-serif);font-size:16px;line-height:2.05;text-align:center;letter-spacing:.06em}
 .invitation-copy strong{color:var(--red);font-weight:900}
 .invitation-sign{margin-top:22px;text-align:center;font-family:var(--font-hand);font-size:20px;color:var(--jade)}
-.letter-mark{position:absolute;right:18px;top:15px;width:58px;height:58px;border:2px solid var(--red);color:var(--red);display:grid;place-items:center;text-align:center;font-family:var(--font-serif);font-size:13px;font-weight:900;line-height:1.25;transform:rotate(7deg);border-radius:3px}
+.letter-mark{position:absolute;right:10px;top:-10px;width:44px;height:44px;border:2px solid var(--red-deep);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--font-serif);font-weight:600;font-size:12px;line-height:1.3;color:var(--red-deep);letter-spacing:1px;transform:rotate(8deg);background:rgba(255,252,246,.94);box-shadow:2px 2px 0 rgba(116,17,22,.18);z-index:6}
 .letter-mark::after{content:'';position:absolute;inset:4px;border:1px dashed var(--red)}
 .letter-route{display:flex;align-items:center;justify-content:center;gap:9px;margin:22px 0 2px;color:rgba(20,20,20,.5);font-size:9px;letter-spacing:.2em}
 .letter-route i{height:1px;width:30px;background:var(--red);position:relative}.letter-route i::after{content:'›';position:absolute;right:-2px;top:-9px;color:var(--red);font-size:15px}
@@ -407,7 +407,9 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
   .notes-row{grid-template-columns:1fr 1fr 1fr}
   .note-card:nth-child(3){grid-column:span 1}
 }
-@media(max-width:380px){.tea-scene{grid-template-columns:95px 1fr;gap:12px;padding:14px}.tea-scene svg{width:95px}.arrival-step{padding:10px 7px}.arrival-step strong{font-size:12px}}
+@media(max-width:380px){
+  .tape--2{right:-56px;bottom:-6px}
+.letter-mark{width:40px;height:40px;right:4px;font-size:11px}.tea-scene{grid-template-columns:95px 1fr;gap:12px;padding:14px}.tea-scene svg{width:95px}.arrival-step{padding:10px 7px}.arrival-step strong{font-size:12px}}
 #musicBtn{position:fixed;top:12px;right:12px;z-index:70;width:50px;height:50px;border-radius:50%;background:rgba(255,254,250,.93);border:2px solid var(--ink);box-shadow:3px 3px 0 rgba(20,20,20,.78);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent}
 #musicBtn svg{width:30px;height:30px}
 #musicBtn .disc{transform-origin:12px 12px;opacity:.94}
@@ -426,17 +428,7 @@ footer{margin-top:70px;background:var(--red);color:#fff;padding:0 0 46px;positio
 <body>
 
 <div class="gate-intro" aria-hidden="true">
-<script>
-try{
-  var __gt = +localStorage.getItem('gateShownAt') || 0;
-  if (Date.now() - __gt < 864e5){
-    var __g = document.currentScript.nextElementSibling;
-    if (__g && __g.classList.contains('gate-inner')) __g = null;
-    var __gi = document.querySelector('.gate-intro');
-    if (__gi) __gi.style.display = 'none';
-  } else { localStorage.setItem('gateShownAt', Date.now()); }
-}catch(e){}
-</script>
+
   <div class="gate-roof"></div>
   <div class="gate-door gate-left"></div><div class="gate-door gate-right"></div>
   <div class="gate-copy"><small>RETURNING HOME</small><strong>沿着厝檐，回家吃席</strong><span>归宁之喜 · 满堂欢喜</span><button class="gate-open-btn" type="button" aria-label="开门进入请柬">开门 · 见喜</button></div>
@@ -503,7 +495,7 @@ try{
     <div class="roofline reveal" aria-hidden="true"></div>
     <div class="invitation-card reveal">
       <div class="letter-mark">归宁<br>喜帖</div>
-      <p class="invitation-eyebrow">NO.01 · THE INVITATION</p>
+      <p class="invitation-eyebrow">NO.01 · INVITE</p>
       <h2 class="invitation-title">吾家有喜</h2>
       <p class="invitation-copy">我们结婚啦。<br><br>关于这一天，想过很多种表达。<br>最后还是觉得——<br><strong>有你在场，就是最好的喜事。</strong><br><br>所以，喜帖送到你手里。<br>十月十一，回汕头，一起吃顿喜酒。</p>
       <div class="letter-route"><span>一封家书</span><i></i><span>捎回汕头</span></div>
